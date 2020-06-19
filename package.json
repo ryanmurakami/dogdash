@@ -1,0 +1,23 @@
+{
+  "name": "dogdash",
+  "version": "1.0.0",
+  "description": "Dog toys delivered to you buy the dogs themselves",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./src/server/app.js",
+    "dev": "AWS_REGION=us-west-2 node ./src/server/app.js",
+    "docker:run": "docker-compose up -d",
+    "docker:logs": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "aws-sdk": "2.697.0",
+    "express": "4.17.1",
+    "react": "16.13.1",
+    "react-redux": "7.2.0",
+    "react-router-dom": "5.2.0",
+    "webpack": "4.43.0",
+    "webpack-cli": "3.3.11"
+  }
+}
