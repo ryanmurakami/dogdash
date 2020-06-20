@@ -1,13 +1,11 @@
 {
   "name": "dogdash",
   "version": "1.0.0",
-  "description": "Dog toys delivered to you buy the dogs themselves",
+  "description": "Dog toys delivered to you by the dogs themselves",
   "main": "index.js",
   "scripts": {
     "start": "node ./src/server/app.js",
-    "dev": "AWS_REGION=us-west-2 node ./src/server/app.js",
-    "docker:run": "docker-compose up -d",
-    "docker:logs": "echo \"Error: no test specified\" && exit 1"
+    "dev": "AWS_REGION=us-west-2 node ./src/server/app.js"
   },
   "author": "",
   "license": "ISC",

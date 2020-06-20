@@ -1,0 +1,10 @@
+#!/bin/bash
+yum update -y
+yum install git -y
+curl --silent --location https://rpm.nodesource.com/setup_14.x | bash -
+yum install nodejs -y
+
+git clone https://github.com/ryanmurakami/dogdash.git
+cd dogdash
+npm install
+npm start
