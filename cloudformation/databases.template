@@ -45,17 +45,3 @@ Resources:
       MasterUserPassword: 'Cash$4Bonez'
       VPCSecurityGroups:
         - !Ref DatabaseSecurityGroup
-
-  DynamoTable:
-    Type: AWS::DynamoDB::Table
-    Properties:
-      TableName: dogs2
-      KeySchema:
-        - AttributeName: id
-          KeyType: HASH
-      AttributeDefinitions:
-        - AttributeName: id
-          AttributeType: S
-      ProvisionedThroughput:
-        ReadCapacityUnits: 5
-        WriteCapacityUnits: 5
