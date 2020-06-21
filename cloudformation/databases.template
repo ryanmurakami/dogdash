@@ -1,0 +1,61 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Databases for DogDash
+
+Resources:
+  DatabaseSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Security Group for DogDash RDS database
+      GroupName: dogdash-rds-sg
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 3306
+          ToPort: 3306
+          CidrIp: 0.0.0.0/0
+      SecurityGroupEgress:
+        - IpProtocol: tcp
+          FromPort: 0
+          ToPort: 255
+          CidrIp: 0.0.0.0/0
+      VpcId: !ImportValue DogDashVPC
+
+  DBSubnetGroup:
+    Type: AWS::RDS::DBSubnetGroup
+    Properties:
+      DBSubnetGroupDescription: Subnet group for DogDash RDS database
+      DBSubnetGroupName: dogdash-subnet-group
+      SubnetIds:
+        - !ImportValue DogDashPrivateSubnetA
+        - !ImportValue DogDashPrivateSubnetB
+
+  MySqlDatabase:
+    Type: AWS::RDS::DBInstance
+    Properties:
+      AllocatedStorage: 10
+      AvailabilityZone: !Select
+        - 0
+        - Fn::GetAZs: !Ref 'AWS::Region'
+      DBInstanceClass: 'db.t3.micro'
+      DBInstanceIdentifier: 'dogdash-rds-db'
+      DBName: 'dogdash'
+      DBSubnetGroupName: !Ref DBSubnetGroup
+      Engine: MySQL
+      EngineVersion: 8.0.19
+      MasterUsername: 'dogdash'
+      MasterUserPassword: 'Cash$4Bonez'
+      VPCSecurityGroups:
+        - !Ref DatabaseSecurityGroup
+
+  DynamoTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: dogs2
+      KeySchema:
+        - AttributeName: id
+          KeyType: HASH
+      AttributeDefinitions:
+        - AttributeName: id
+          AttributeType: S
+      ProvisionedThroughput:
+        ReadCapacityUnits: 5
+        WriteCapacityUnits: 5

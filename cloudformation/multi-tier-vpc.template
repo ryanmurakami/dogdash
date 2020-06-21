@@ -16,6 +16,7 @@ Resources:
     Properties:
       VpcId: !Ref VPC
       CidrBlock: 10.0.0.0/24
+      MapPublicIpOnLaunch: 'true'
       AvailabilityZone: !Select
         - 0
         - Fn::GetAZs: !Ref 'AWS::Region'
@@ -28,6 +29,7 @@ Resources:
     Properties:
       VpcId: !Ref VPC
       CidrBlock: 10.0.1.0/24
+      MapPublicIpOnLaunch: 'true'
       AvailabilityZone: !Select
         - 1
         - Fn::GetAZs: !Ref 'AWS::Region'
@@ -39,13 +41,27 @@ Resources:
     Type: AWS::EC2::Subnet
     Properties:
       VpcId: !Ref VPC
-      CidrBlock: 10.0.2.0/24
+      CidrBlock: 10.0.3.0/24
+      MapPublicIpOnLaunch: 'true'
+      AvailabilityZone: !Select
+        - 0
+        - Fn::GetAZs: !Ref 'AWS::Region'
+      Tags:
+        - Key: Name
+          Value: dogdash-private-subneta
+
+  VPCSubnetD:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref VPC
+      CidrBlock: 10.0.4.0/24
+      MapPublicIpOnLaunch: 'true'
       AvailabilityZone: !Select
         - 1
         - Fn::GetAZs: !Ref 'AWS::Region'
       Tags:
         - Key: Name
-          Value: dogdash-private-subneta
+          Value: dogdash-private-subnetb
 
   InternetGateway:
     Type: AWS::EC2::InternetGateway
@@ -87,3 +103,26 @@ Resources:
     Properties:
       RouteTableId: !Ref PublicRouteTable
       SubnetId: !Ref VPCSubnetB
+
+  SubnetCRouteTableAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref PublicRouteTable
+      SubnetId: !Ref VPCSubnetC
+
+Outputs:
+  DogDashVPC:
+    Description: VPC for the DogDash application
+    Value: !Ref VPC
+    Export:
+      Name: DogDashVPC
+  DogDashPrivateSubnetA:
+    Description: Private subnet for the DogDash application
+    Value: !Ref VPCSubnetC
+    Export:
+      Name: DogDashPrivateSubnetA
+  DogDashPrivateSubnetB:
+    Description: Private subnet for the DogDash application
+    Value: !Ref VPCSubnetD
+    Export:
+      Name: DogDashPrivateSubnetB
