@@ -110,6 +110,12 @@ Resources:
       RouteTableId: !Ref PublicRouteTable
       SubnetId: !Ref VPCSubnetC
 
+  SubnetDRouteTableAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref PublicRouteTable
+      SubnetId: !Ref VPCSubnetD
+
 Outputs:
   DogDashVPC:
     Description: VPC for the DogDash application
