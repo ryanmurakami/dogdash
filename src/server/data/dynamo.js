@@ -2,15 +2,16 @@ const AWS = require('aws-sdk')
 const axios = require('axios')
 
 let res
+let client
+
 axios.get('http://169.254.169.254/latest/dynamic/instance-identity/document')
   .then(response => {
     res = response
     AWS.config.update({ region: response.data.region })
+    client = new AWS.DynamoDB.DocumentClient()
   })
 
 const table = 'dogs'
-
-const client = new AWS.DynamoDB.DocumentClient()
 
 async function get (id) {
   let dog
@@ -34,8 +35,7 @@ async function test () {
   } catch (e) {
     status = {
       connected: false,
-      error: e,
-      res
+      error: e
     }
   }
 
