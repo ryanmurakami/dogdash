@@ -1,7 +1,10 @@
 const AWS = require('aws-sdk')
 const axios = require('axios')
 
-const res = await axios.get('http://169.254.169.254/latest/dynamic/instance-identity/document')
+let res
+axios.get('http://169.254.169.254/latest/dynamic/instance-identity/document')
+  .then(response => res = response)
+
 AWS.config.update({ region: process.env.AWS_REGION })
 
 const table = 'dogs'
