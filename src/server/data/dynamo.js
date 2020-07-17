@@ -10,7 +10,7 @@ async function get (id) {
   const params = {
     TableName: table,
     Key: {
-      HashKey: id
+      id
     }
   }
   dog = await client.get(params).promise()
