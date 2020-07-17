@@ -3,9 +3,10 @@ const axios = require('axios')
 
 let res
 axios.get('http://169.254.169.254/latest/dynamic/instance-identity/document')
-  .then(response => res = response)
-
-AWS.config.update({ region: process.env.AWS_REGION })
+  .then(response => {
+    res = response
+    AWS.config.update({ region: response.data.region })
+  })
 
 const table = 'dogs'
 
