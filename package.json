@@ -5,12 +5,13 @@
   "main": "index.js",
   "scripts": {
     "start": "node ./src/server/app.js",
-    "dev": "AWS_REGION=us-west-2 node ./src/server/app.js"
+    "dev": "node ./src/server/app.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "aws-sdk": "2.697.0",
+    "axios": "0.19.2",
     "express": "4.17.1",
     "react": "16.13.1",
     "react-redux": "7.2.0",

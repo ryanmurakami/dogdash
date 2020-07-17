@@ -1,4 +1,7 @@
 const AWS = require('aws-sdk')
+const axios = require('axios')
+
+const res = await axios.get('http://169.254.169.254/latest/dynamic/instance-identity/document')
 AWS.config.update({ region: process.env.AWS_REGION })
 
 const table = 'dogs'
@@ -27,7 +30,8 @@ async function test () {
   } catch (e) {
     status = {
       connected: false,
-      error: e
+      error: e,
+      res
     }
   }
 
