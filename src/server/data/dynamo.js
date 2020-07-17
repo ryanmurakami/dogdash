@@ -13,14 +13,28 @@ async function get (id) {
       HashKey: id
     }
   }
-  try {
-    dog = await client.get(params).promise()
-  } catch (e) {
-    console.error(e)
-  }
+  dog = await client.get(params).promise()
   return dog
 }
 
+async function test () {
+  let status
+  try {
+    dog = await get('1')
+    status = {
+      connected: true
+    }
+  } catch (e) {
+    status = {
+      connected: false,
+      error: e
+    }
+  }
+
+  return status
+}
+
 module.exports = {
-  get
+  get,
+  test
 }
