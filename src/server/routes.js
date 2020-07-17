@@ -12,7 +12,7 @@ async function indexHandler (req, res) {
   const dynamoStatus = await db.test()
   const dynaMessage = dynamoStatus.connected
     ? 'connected'
-    : `not connected. ${dynamoStatus.error} ${JSON.stringify(process.env)} ${dynamoStatus.res}`
+    : `not connected. ${dynamoStatus.error} ${JSON.stringify(dynamoStatus.res)}`
   res.send(`Hello from DogDash. Dynamo is ${dynaMessage}.`)
 }
 
