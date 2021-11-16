@@ -10,7 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "aws-sdk": "2.697.0",
+    "aws-sdk": "2.814.0",
     "axios": "0.19.2",
     "express": "4.17.1",
     "json-stringify-safe": "5.0.1",
