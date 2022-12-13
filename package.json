@@ -12,7 +12,7 @@
   "dependencies": {
     "aws-sdk": "2.697.0",
     "axios": "0.19.2",
-    "express": "4.17.1",
+    "express": "4.17.3",
     "json-stringify-safe": "5.0.1",
     "react": "16.13.1",
     "react-redux": "7.2.0",
